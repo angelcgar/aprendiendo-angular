@@ -1,0 +1,47 @@
+<p-panel header="Pipes Básicos" class="p-2">
+  <p>pipes inclidos en angular - usualmente en el common mudule</p>
+</p-panel>
+
+<div class="grid">
+  <div class="col-12 md:col-4">
+    <p-card header="uppercase"> {{ nameLower | uppercase }} </p-card>
+  </div>
+
+  <div class="col-12 md:col-4">
+    <p-card header="lowercase"> {{ nameUpper | lowercase }} </p-card>
+  </div>
+
+  <div class="col-12 md:col-4">
+    <p-card header="titlecase"> {{ fullName | titlecase }} </p-card>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <p-card header="titlecase">
+      <ol>
+        <li>fecha</li>
+        <li>fecha | date</li>
+      </ol>
+      <hr />
+      <ol>
+        <li>fecha | date: 'long': '':'es-hu'</li>
+        <li>customDate | date : "long" : "" : "en-US"</li>
+        <li>fecha | date: 'long': '':'fr-CA'</li>
+      </ol>
+    </p-card>
+  </div>
+
+  <div class="col-12 md:col-6">
+    <p-card header="titlecase">
+      <ol>
+        <li>{{ customDate }}</li>
+        <li>{{ customDate | date }}</li>
+      </ol>
+      <hr />
+      <ol>
+        <li>{{ customDate | date : "long" : "" : "es-HN" }}</li>
+        <li>{{ customDate | date : "long" : "" : "en-US" }}</li>
+        <li>{{ customDate | date : "long" : "" : "fr-CA" }}</li>
+      </ol>
+    </p-card>
+  </div>
+</div>
