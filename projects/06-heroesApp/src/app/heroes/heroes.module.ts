@@ -12,6 +12,7 @@ import { NewPagesComponent } from './pages/new-pages/new-pages.component';
 import { SearchPagesComponent } from './pages/search-pages/search-pages.component';
 import { CardComponent } from './components/card/card.component';
 import { ImagePipe } from './pipes/image.pipe';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ImagePipe } from './pipes/image.pipe';
 
     // Pipe
     ImagePipe,
+     ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
