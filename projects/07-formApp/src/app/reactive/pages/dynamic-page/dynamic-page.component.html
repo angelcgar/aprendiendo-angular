@@ -11,7 +11,7 @@
         formControlName="name"
         placeholder="Nombre de la persona"
       />
-      <span class="form-text text-danger" *ngIf="isValidField('name')">
+      <span *ngIf="isValidField('name')" class="form-text text-danger">
         {{ getFieldError("name") }}
       </span>
     </div>
@@ -29,8 +29,8 @@
         />
 
         <button
+          (click)="onAddToFavorites()"
           class="btn btn-outline-primary"
-          (click)="onAddToFavorite()"
           type="button"
         >
           Agregar favorito
@@ -45,22 +45,23 @@
     <div class="col-sm-9" formArrayName="favoriteGames">
       <div
         class="mb-1"
-        *ngFor="let facorite of favoriteGames.controls; let i = index"
+        *ngFor="let favorite of favoriteGames.controls; let i = index"
       >
         <div class="input-group">
-          <input class="form-control" [formControlName]="i" />
+          <input [formControlName]="i" class="form-control" />
 
           <button
+            (click)="onDeleteFavorite(i)"
             class="btn btn-outline-danger"
             type="button"
-            (click)="onDeleteFavorite(i)"
           >
             Eliminar
           </button>
         </div>
+
         <span
-          class="form-text text-danger"
           *ngIf="isValidFieldInArray(favoriteGames, i)"
+          class="form-text text-danger"
         >
           Este campo es requerido
         </span>
