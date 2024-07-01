@@ -13,7 +13,7 @@ import { User } from '../../interfaces/user-requees.interface';
   styleUrl: './properties-page.component.css',
 })
 export class PropertiesPageComponent implements OnDestroy, OnInit {
-  public couenter = signal(10);
+  public counter = signal(10);
 
   public user = signal<User>({
     id: 1,
@@ -28,13 +28,13 @@ export class PropertiesPageComponent implements OnDestroy, OnInit {
   );
 
   public userChangeEffect = effect(() => {
-    console.log(`${this.user().first_name} - ${this.couenter}`);
+    console.log(`${this.user().first_name} - ${this.counter()}`);
   });
 
   ngOnInit(): void {
     setInterval(() => {
-      this.couenter.update((current) => current + 1);
-      if (this.couenter() == 15) {
+      this.counter.update((current) => current + 1);
+      if (this.counter() == 15) {
         this.userChangeEffect.destroy()
       }
     }, 1000);
@@ -45,10 +45,10 @@ export class PropertiesPageComponent implements OnDestroy, OnInit {
   }
 
   increaseBy(value: number): void {
-    this.couenter.update((current) => current + value);
+    this.counter.update((current) => current + value);
   }
 
-  onFielUpdated(field: keyof User, value: string): void {
+  onFieldUpdated(field: keyof User, value: string): void {
     // this.user.set({
     //   ...this.user(),
     //   [field]: value,
