@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { ProductCardComponent } from './ui/product-card/product-card.component';
-import { Product } from '../../../interfaces/produc.interface';
+import { Product } from '@interfaces/produc.interface';
 import { interval, take, tap } from 'rxjs';
 
 @Component({
@@ -14,23 +14,18 @@ import { interval, take, tap } from 'rxjs';
   standalone: true,
   imports: [CommonModule, ProductCardComponent],
   templateUrl: './input-output.component.html',
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class InputOutputComponent implements OnDestroy {
   public products = signal<Product[]>([
     {
       id: 1,
-      name: 'producto 1',
+      name: 'Product 1',
       quantity: 0,
     },
     {
       id: 2,
-      name: 'producto 2',
+      name: 'Product 2',
       quantity: 0,
     },
   ]);
@@ -38,11 +33,11 @@ export default class InputOutputComponent implements OnDestroy {
   private intervalSubscription = interval(1000)
     .pipe(
       tap(() => {
-        this.products.update((product) => [
-          ...product,
+        this.products.update((products) => [
+          ...products,
           {
-            id: product.length + 1,
-            name: `Product ${product.length + 1}`,
+            id: products.length + 1,
+            name: `Product ${products.length + 1}`,
             quantity: 0,
           },
         ]);
@@ -53,6 +48,12 @@ export default class InputOutputComponent implements OnDestroy {
     .subscribe();
 
   ngOnDestroy(): void {
-    this.intervalSubscription.unsubscribe()
+    this.intervalSubscription.unsubscribe();
+  }
+
+  public updateProduct(product: Product, quantity: number) {
+    this.products.update((products) =>
+      products.map((p) => (p.id === product.id ? { ...p, quantity } : p)),
+    );
   }
 }
